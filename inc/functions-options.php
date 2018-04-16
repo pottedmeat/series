@@ -24,6 +24,20 @@ function get_posts_per_page() {
 }
 
 /**
+ * Register post types for the plugin.
+ *
+ * @since   next
+ * @access  public
+ * @return  array
+ */
+function get_post_types() {
+
+	$post_types = array( 'post' );
+
+	return apply_filters( 'series/get_post_types', $post_types );
+}
+
+/**
  * Returns the posts orderby on series archives.
  *
  * @since  2.0.0
