@@ -115,11 +115,16 @@ function register_taxonomies() {
 	);
 
 	// Register the taxonomies.
-	register_taxonomy(
-		get_series_taxonomy(),
-		array( 'post' ),
-		apply_filters( 'series/series_taxonomy_args', $series_args )
-	);
+	$taxonomy = get_series_taxonomy();
+	$post_types = get_post_types();
+	if ( !empty( $post_types ) ) {
+		register_taxonomy(
+			$taxonomy,
+			$post_types,
+			apply_filters( 'series/series_taxonomy_args', $series_args )
+		);
+		register_taxonomy_for_object_type( $taxonomy, array_diff( $post_types, array( 'post' ) ) );
+	}
 }
 
 /**
